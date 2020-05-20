@@ -28,3 +28,12 @@ export class CreatePostInput extends PostModel {
   @Field({nullable: true})
   authorId: string
 }
+@InputType()
+export class UpdatePostInput extends PostModel {
+  @Field()
+  id: string;
+  @Field()
+  title: string;
+  @Field()
+  content: string;
+}

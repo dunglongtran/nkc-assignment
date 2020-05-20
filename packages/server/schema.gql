@@ -33,6 +33,8 @@ input CreatePostInput {
 type Mutation {
   createAuthor(input: CreateAuthorInput!): Author!
   createPost(input: CreatePostInput!): Post!
+  updatePost(input: UpdatePostInput!): Post!
+  deletePost(id: String!): Boolean!
 }
 
 type Post implements APost {
@@ -45,8 +47,15 @@ type Post implements APost {
 type Query {
   getAuthors: [Author!]!
   getPosts: [Post!]!
+  getPost(id: String!): Post!
 }
 
 type Subscription {
   createdAuthor: Author!
+}
+
+input UpdatePostInput {
+  id: String!
+  title: String!
+  content: String!
 }

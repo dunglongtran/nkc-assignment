@@ -10,6 +10,7 @@
     "packages/*"
   ],
   "scripts": {
+    "start:nkc": "lerna run start:nkc --parallel --stream",
     "start": "lerna run start --parallel",
     "start:dev": "lerna run start:dev --parallel",
     "test": "lerna run test --parallel",
@@ -17,7 +18,9 @@
     "bootstrap": "lerna bootstrap --use-workspaces"
   },
   "devDependencies": {
-    "lerna": "^3.16.4"
+    "lerna": "^3.21.0",
+    "wait-on": "^5.0.0",
+    "concurrently": "^5.2.0"
   },
   "keywords": ["monorepo","universal","yarn-workspaces","typescript","lerna","nestjs","reactjs","react-native","expo","electron","typeorm"]
 }

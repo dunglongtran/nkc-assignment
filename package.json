@@ -10,6 +10,7 @@
     "packages/*"
   ],
   "scripts": {
+    "install": "lerna bootstrap",
     "start:nkc": "lerna run start:nkc --parallel --stream",
     "start": "lerna run start --parallel",
     "start:dev": "lerna run start:dev --parallel",

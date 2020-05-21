@@ -10,17 +10,17 @@ export const GET_AUTHORS_QUERY=gql`
 `;
 
 export const DETAIL_AUTHOR_QUERY=gql`
-    query getPost($id: String!) {
-        getPost(id: $id) {
+    query getAuthor($id: String!) {
+        getAuthor(id: $id) {
             id
-            title
-            content
-            author {
+            name
+            posts {
                 id
-                name
-                posts {
+                title
+                content
+                author {
                     id
-                    title
+                    name
                 }
             }
         }

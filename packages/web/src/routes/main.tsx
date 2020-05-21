@@ -10,6 +10,8 @@ import {
 import {PostsScreen} from "../screens/posts.screen";
 import {PostScreen} from "../screens/post.screen";
 import {Box, Flex, Grid} from "@chakra-ui/core";
+import {AuthorsScreen} from "../screens/authors.screen";
+import {AuthorScreen} from "../screens/author.screen";
 
 
 export default function App() {
@@ -21,6 +23,12 @@ export default function App() {
                         <Link to="/">
                             <Box as="button" rounded="md" bg="tomato" color="white" px={4} h={8}>
                                 Home
+                            </Box>
+                        </Link>
+                        <Link to="/authors">
+
+                            <Box as="button" rounded="md" bg="tomato" color="white" px={4} h={8} >
+                                Author
                             </Box>
                         </Link>
                         <Link to="/posts">
@@ -43,6 +51,12 @@ export default function App() {
                     </Route>
                     <Route path="/posts/:id">
                         <PostScreen/>
+                    </Route>
+                    <Route path="/authors" exact>
+                        <AuthorsScreen/>
+                    </Route>
+                    <Route path="/authors/:id">
+                        <AuthorScreen/>
                     </Route>
                     <Route path="/">
                         <Home/>

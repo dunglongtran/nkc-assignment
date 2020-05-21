@@ -61,14 +61,19 @@ export function PostModal(props: IPostModalProps) {
 }
 
 export function PostCreateModal() {
-    const history=useHistory()
+    const history = useHistory()
     const {loading, data} = useQuery(GET_AUTHORS_QUERY, {variables: {}});
     const {isOpen, onOpen, onClose} = useDisclosure();
-    const [updateValue, setUpdateValue] = useState({authorId: ""});
+    const [updateValue, setUpdateValue] = useState({authorId: "", title: "", content: ""});
     const [createPost] = useMutation(CREATE_POST_MUTATION,)
     const onConfirm = async (event: React.MouseEvent | React.KeyboardEvent, reason?: "pressedEscape" | "clickedOverlay",) => {
-        const {data} =await createPost({variables: {input: updateValue}});
-        data && typeof data.createPost === 'object' && history.push(`/posts/${data.createPost.id}`)
+        const {authorId,title,content} = updateValue
+        if (authorId && title && content) {
+            const {data} = await createPost({variables: {input: updateValue}});
+            data && typeof data.createPost === 'object' && history.push(`/posts/${data.createPost.id}`)
+        } else {
+            alert("Please input required fields")
+        }
     }
     const update = (value: object) => {
         setUpdateValue({...updateValue, ...value})

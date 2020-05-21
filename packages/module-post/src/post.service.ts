@@ -4,7 +4,7 @@ import {Post as PostModel} from '@mono/models';
 import {InjectRepository} from '@nestjs/typeorm';
 import {AuthorEntity, PostEntity} from '@mono/entities';
 import {CreatePostInput, Post, UpdatePostInput} from './post.type';
-import {detectBufferEncoding} from "tslint/lib/utils";
+import {detectBufferEncoding} from 'tslint/lib/utils';
 
 @Injectable()
 export class PostService {
@@ -26,16 +26,20 @@ export class PostService {
     }
 
     async deletePost(id: string) {
-        const entity = this.repository.create({id});
+        // @ts-ignore
+        const entity = this.repository.create({id: id * 1});
         const deleted = await this.repository.remove(entity);
-        console.log('deleted', id, deleted, entity)
-        return deleted
+        console.log('deleted', id, deleted, entity);
+        return deleted;
     }
 
     async updatePost(arg: UpdatePostInput) {
-        const entity = this.repository.create(arg);
-        console.log('updatePost', arg, entity);
-        return this.repository.save(entity);
+        const entity = await this.repository.findOne(arg.id);
+        // @ts-ignore
+        const preUpdate = {...entity, ...arg, id: arg.id * 1};
+        const result = await this.repository.save(preUpdate as PostEntity);
+        console.log('updatePost', arg, entity, preUpdate, result);
+        return result;
     }
 
     async createPost(arg: CreatePostInput) {
@@ -48,7 +52,7 @@ export class PostService {
 
     async findAuthorByPost(post: PostModel) {
         console.log('findAuthorByPost', post);
-        const authorRelation = await this.repository.findOne(post.id, {relations: ['author']});
+        const authorRelation = await this.repository.findOne(post.id * 1, {relations: ['author']});
         return authorRelation.author;
     }
 }

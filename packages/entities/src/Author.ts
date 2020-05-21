@@ -1,15 +1,14 @@
-import { Author} from "@mono/models";
-import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from 'typeorm'
-import {PostEntity} from "./Post";
+import { Author} from '@mono/models';
+import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from 'typeorm';
+import {PostEntity} from './Post';
 
-@Entity({name: "authors"})
+@Entity({name: 'authors'})
 export class AuthorEntity extends Author {
-  @PrimaryGeneratedColumn("increment")
-  id: string
+  @PrimaryGeneratedColumn('increment')
+  id: string;
   @Column()
-  name: string
+  name: string;
   @OneToMany(type => PostEntity, (post: PostEntity) => post.author)
-  posts: PostEntity[]
-
+  posts: PostEntity[];
 
 }

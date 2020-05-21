@@ -22,14 +22,14 @@ export function PostForm(props: IPostFormProps) {
     }
     return (
         <Stack>
-            <FormControl>
+            <FormControl isRequired>
                 <FormLabel>Title</FormLabel>
                 <Input placeholder="please input post's title"
                        value={props.post.title ||''}
                        onChange={(event: any) => onChange({title: event.target.value})}/>
             </FormControl>
 
-            <FormControl mt={4}>
+            <FormControl mt={4} isRequired>
                 <FormLabel>Content</FormLabel>
                 <Textarea placeholder="please input content"
                           value={props.post.content ||''}

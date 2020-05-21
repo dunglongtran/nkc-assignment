@@ -6,7 +6,7 @@ import {Author} from '@mono/module-author'
 @InterfaceType()
 export abstract class APost implements IPost {
   @Field(type => ID)
-  id: string
+  id: number
   @Field()
   content: string;
   @Field()
@@ -29,7 +29,7 @@ export class CreatePostInput extends PostModel {
   authorId: string
 }
 @InputType()
-export class UpdatePostInput extends PostModel {
+export class UpdatePostInput {
   @Field()
   id: string;
   @Field()

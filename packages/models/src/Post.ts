@@ -3,7 +3,7 @@ import {Author} from "./Author";
 
 export abstract class Post implements IPost {
 
-  id: string;
+  id: number;
   title: string;
   content: string;
   author: Author;

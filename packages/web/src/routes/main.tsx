@@ -9,27 +9,28 @@ import {
 } from 'react-router-dom';
 import {PostsScreen} from "../screens/posts.screen";
 import {PostScreen} from "../screens/post.screen";
+import {Box, Flex, Grid} from "@chakra-ui/core";
 
 
 export default function App() {
     return (
         <Router>
             <div>
-                <ul>
-                    <li>
-                        <Link to="/">Home</Link>
-                    </li>
-                    <li>
-                        <Link to="/posts">Posts</Link>
-                    </li>
-                    <li>
-                        <Link to="/about">About</Link>
-                    </li>
-                    <li>
-                        <Link to="/topics">Topics</Link>
-                    </li>
-                </ul>
+                <Flex align="center" padding={'4vh'} >
+                    <Grid templateColumns="repeat(4, 1fr)" gap={6} >
+                        <Link to="/">
+                            <Box as="button" rounded="md" bg="tomato" color="white" px={4} h={8}>
+                                Home
+                            </Box>
+                        </Link>
+                        <Link to="/posts">
 
+                            <Box as="button" rounded="md" bg="tomato" color="white" px={4} h={8} >
+                                Post
+                            </Box>
+                        </Link>
+                    </Grid>
+                </Flex>
                 <Switch>
                     <Route path="/about">
                         <About/>

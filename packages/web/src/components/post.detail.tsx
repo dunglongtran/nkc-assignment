@@ -17,11 +17,12 @@ import {FaHeart} from 'react-icons/fa'
 import {ConfirmDialog} from "./confirm.dialog";
 import {useMutation} from "@apollo/react-hooks";
 import {DELETE_POST_MUTATION, UPDATE_POST_MUTATION} from "../graphqls/posts.mutation";
-import {useParams} from "react-router-dom";
+import {useParams, useHistory} from "react-router-dom";
 import {PostModal} from "./post.modal";
 
 export function PostDetail({post = {}}: { post: any }) {
     const {id} = useParams();
+    const history = useHistory()
     // @ts-ignore
     const {isOpen, onOpen, onClose} = useDisclosure();
     const [isOpenDeleteDialog, setOpenDeleteDialog] = useState(false);
@@ -50,8 +51,15 @@ export function PostDetail({post = {}}: { post: any }) {
     const showDeleteDialog = () => setOpenDeleteDialog(true);
     const closeDeleteDialog = () => setOpenDeleteDialog(false);
     const deleteAction = async () => {
-        const result = await deletePost();
-        console.log(result)
+        try {
+            const result = await deletePost();
+            console.log(result)
+        }catch (error) {
+
+        }finally {
+            history.goBack()
+        }
+
     };
     const showUpdateModal = () => onOpen();
     const closeUpdateModal = () => onClose();
@@ -76,7 +84,7 @@ export function PostDetail({post = {}}: { post: any }) {
                  margin={'auto'}>
                 <Box alignItems={'center'} position={'relative'}>
                     <Image src={property.imageUrl} alt={property.imageAlt} margin={'auto'} alignSelf={'center'}/>
-                    <Stack size={'xs'} width={30} position={'absolute'} right={'5%'} top={'25%'}>
+                    <Stack size={'xs'} width={'auto'} position={'absolute'} right={'5%'} top={'25%'} background={'#333'} opacity={0.8} height={'auto'} padding={'5px'}>
                         <IconButton
                             variant="outline"
                             variantColor="teal"

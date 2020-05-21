@@ -23,7 +23,9 @@ export function PostsCard({post = {}}: { post: any }) {
                 <Box d="flex" alignItems="center">
 
                     <Avatar size={'xs'} name={post.author.name} src="https://bit.ly/dan-abramov"/>
-                    <Heading size={'xs'}>{post.author.name}</Heading>
+                    <Link to={`/authors/${post.author.id}`}>
+                        <Heading size={'xs'} textDecoration={'underline'}>{post.author.name}</Heading>
+                    </Link>
                 </Box>
 
                 <Box
@@ -32,6 +34,7 @@ export function PostsCard({post = {}}: { post: any }) {
                     as="h4"
                     lineHeight="tight"
                     isTruncated
+                    textDecoration={'underline'}
                 >
                     <Link to={`/posts/${post.id}`}>
                         {property.title}

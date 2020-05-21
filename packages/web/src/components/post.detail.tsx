@@ -8,7 +8,6 @@ import {
     Icon,
     IconButton,
     Image,
-    Link,
     Stack,
     Textarea,
     useDisclosure
@@ -17,7 +16,7 @@ import {FaHeart} from 'react-icons/fa'
 import {ConfirmDialog} from "./confirm.dialog";
 import {useMutation} from "@apollo/react-hooks";
 import {DELETE_POST_MUTATION, UPDATE_POST_MUTATION} from "../graphqls/posts.mutation";
-import {useParams, useHistory} from "react-router-dom";
+import {useParams, useHistory,Link} from "react-router-dom";
 import {PostModal} from "./post.modal";
 
 export function PostDetail({post = {}}: { post: any }) {
@@ -54,9 +53,9 @@ export function PostDetail({post = {}}: { post: any }) {
         try {
             const result = await deletePost();
             console.log(result)
-        }catch (error) {
+        } catch (error) {
 
-        }finally {
+        } finally {
             history.goBack()
         }
 
@@ -84,7 +83,8 @@ export function PostDetail({post = {}}: { post: any }) {
                  margin={'auto'}>
                 <Box alignItems={'center'} position={'relative'}>
                     <Image src={property.imageUrl} alt={property.imageAlt} margin={'auto'} alignSelf={'center'}/>
-                    <Stack size={'xs'} width={'auto'} position={'absolute'} right={'5%'} top={'25%'} background={'#333'} opacity={0.8} height={'auto'} padding={'5px'}>
+                    <Stack size={'xs'} width={'auto'} position={'absolute'} right={'5%'} top={'25%'} background={'#333'}
+                           opacity={0.8} height={'auto'} padding={'5px'}>
                         <IconButton
                             variant="outline"
                             variantColor="teal"
@@ -94,7 +94,7 @@ export function PostDetail({post = {}}: { post: any }) {
                             isRound
                         />
                         <IconButton variant="outline"
-                                    variantColor="teal" aria-label="Edit" icon="edit" size={'sm'} isRound
+                                    variantColor="blue" aria-label="Edit" icon="edit" size={'sm'} isRound
                                     onClick={showUpdateModal}/>
                         <IconButton variant="outline"
                                     variantColor="red" aria-label="Delete" icon="delete" size={'sm'} isRound
@@ -106,7 +106,9 @@ export function PostDetail({post = {}}: { post: any }) {
                 <Box p="6">
                     <Box d="flex" alignItems="center">
                         <Avatar size={'xs'} name={currentPost.author.name} src="https://bit.ly/dan-abramov"/>
-                        <Heading size={'xs'}>{currentPost.author.name}</Heading>
+                        <Link to={`/authors/${currentPost.author.id}`}>
+                            <Heading size={'xs'} textDecoration={'underline'}>{currentPost.author.name}</Heading>
+                        </Link>
                     </Box>
 
                     <Box
@@ -116,9 +118,7 @@ export function PostDetail({post = {}}: { post: any }) {
                         lineHeight="tight"
                         isTruncated
                     >
-                        <Link href={`${currentPost.id}`}>
                             {property.title}
-                        </Link>
                     </Box>
                     <Box>
                         <Textarea
